@@ -21,8 +21,8 @@ class Matrix {
         this.performanceJsCode = ''
     }
 
-    toJsCode (matrix) {
-        this.initJsCode(matrix)
+    async toJsCode (matrix) {
+        await this.initJsCode(matrix)
     }
 
     async initJsCode(matrix) {
