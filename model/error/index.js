@@ -7,6 +7,7 @@ class Error {
     }
 
     toJsCode (options) {
+        this.resetState()
         const [promise] = options.filter(n => n === 'Promise Reject')
         const [shell] = options.filter(n => n === '脚本错误')
         const [outside] = options.filter(n => n === '外部资源')
@@ -31,6 +32,11 @@ class Error {
 
     toGlobalErrorCode () {
         this.globalErrorCode = globalError()
+    }
+
+    resetState () {
+        this.promiseErrorCode = ''
+        this.globalErrorCode = ''
     }
 }
 
