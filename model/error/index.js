@@ -6,9 +6,18 @@ class Error {
         this.globalErrorCode = ''
     }
 
-    toJsCode () {
-        this.toPromiseErrorCode()
-        this.toGlobalErrorCode()
+    toJsCode (options) {
+        const [promise] = options.filter(n => n === 'Promise Reject')
+        const [shell] = options.filter(n => n === '脚本错误')
+        const [outside] = options.filter(n => n === '外部资源')
+
+        if (promise) {
+            this.toPromiseErrorCode()
+        }
+
+        if (shell || outside) {
+            this.toGlobalErrorCode()
+        }
 
         return `
             ${this.globalErrorCode}
