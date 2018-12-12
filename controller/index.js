@@ -21,7 +21,15 @@ exports.api = async (ctx, next) => {
 
     const logPath = path.resolve(__dirname, '../sdk-log/log.json')
 
-    const json = JSON.stringify(body)
+    let logArray = [];
+    const log = fs.readFileSync(logPath)
+
+    if (log) {
+        logArray = JSON.parse(log)
+    }
+    logArray.push(body)
+
+    const json = JSON.stringify(logArray)
 
     fs.appendFileSync(logPath, json)
 
