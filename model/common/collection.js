@@ -2,7 +2,6 @@ const collection = () => {
     return `
         var collection = function (e) {
             var e = e || window.event;
-            e.preventDefault();
             var target = e.target || e.srcElement;
             var parent = target.parentElement;
 
