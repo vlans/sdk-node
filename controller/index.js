@@ -1,5 +1,4 @@
-const Promise = require('bluebird')
-const fs = Promise.promisifyAll(require('fs'))
+const fs = require('fs')
 const path = require('path')
 const matrix = require('../model/matrix/index')
 const uglify = require('../uglify/index')
@@ -24,16 +23,7 @@ exports.api = async (ctx, next) => {
 
     const json = JSON.stringify(body)
 
-    try {
-        const isFile = fs.statSync(logPath).isFile()
-        if (!isFile) {
-            fs.writeFileSync(logPath, json)
-        } else {
-            fs.appendFileSync(logPath, json)
-        }
-    } catch (e) {
-        fs.writeFileSync(logPath, json)
-    }
+    fs.appendFileSync(logPath, json)
 
     ctx.body = {
         data: {
